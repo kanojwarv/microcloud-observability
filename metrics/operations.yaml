@@ -1,0 +1,6 @@
+metrics:
+  - metric: lxd_cpu_seconds_total
+    object: cluster
+    category: inventory
+    recording_rule: cluster_running_vm_count
+    notes: Uses RUNNING state label for inventory summary.

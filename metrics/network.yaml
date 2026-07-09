@@ -1,0 +1,10 @@
+metrics:
+  - metric: lxd_network_receive_bytes_total
+    object: vm
+    category: network
+    recording_rule: vm_network_rx_bytes_rate
+
+  - metric: lxd_network_transmit_bytes_total
+    object: vm
+    category: network
+    recording_rule: vm_network_tx_bytes_rate

@@ -1,0 +1,23 @@
+# Compute metric metadata
+metrics:
+  - metric: lxd_cpu_seconds_total
+    object: vm
+    category: performance
+    unit: cpu_seconds
+    recording_rule: vm_cpu_usage_seconds_rate
+    dashboards: [executive, vm]
+    alerts: [high_vm_cpu]
+
+  - metric: lxd_disk_read_bytes_total
+    object: vm
+    category: storage
+    unit: bytes
+    recording_rule: vm_disk_read_bytes_rate
+    dashboards: [vm]
+
+  - metric: lxd_disk_written_bytes_total
+    object: vm
+    category: storage
+    unit: bytes
+    recording_rule: vm_disk_write_bytes_rate
+    dashboards: [vm]

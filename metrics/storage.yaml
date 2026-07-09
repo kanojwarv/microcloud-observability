@@ -1,0 +1,19 @@
+metrics:
+  - metric: ceph_health_status
+    object: cluster
+    category: health
+    recording_rule: cluster_ceph_health
+    dashboards: [executive, storage]
+    alerts: [cluster_health]
+
+  - metric: ceph_cluster_total_used_bytes
+    object: cluster
+    category: capacity
+    recording_rule: cluster_storage_used_bytes
+    dashboards: [executive, capacity]
+
+  - metric: ceph_osd_up
+    object: osd
+    category: health
+    recording_rule: ceph_osd_up_count
+    dashboards: [storage]

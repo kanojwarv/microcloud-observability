@@ -1,0 +1,13 @@
+variables:
+  - name: cluster
+    label: Cluster
+  - name: host
+    label: Host
+  - name: vm
+    label: VM
+  - name: project
+    label: Project
+  - name: pool
+    label: Pool
+  - name: osd
+    label: OSD
