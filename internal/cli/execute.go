@@ -1,8 +1,10 @@
 package cli
 
 import (
+	"context"
 	"errors"
 	"fmt"
+
 	"github.com/vishalkanojwar/microcloud-observability/pkg/validate"
 )
 
@@ -16,7 +18,10 @@ func Execute(args []string) error {
 		fmt.Println("Version: dev")
 		return nil
 	case "validate":
-		return validate.Run(".")
+		engine := validate.New()
+		report := engine.Run(context.Background())
+		fmt.Printf("%+v\n", report)
+		return nil
 	default:
 		return fmt.Errorf("unknown command: %s", args[0])
 	}
