@@ -6,14 +6,14 @@ First successful compilation of the `mco` binary.
 
 The project transitioned from documentation into executable software.
 
-Command:
+Command:-
 
 make build
 
-Result:
+Result:-
 
 SUCCESS
 
-Milestone:
+Milestone:-
 
 v0.0.2-dev
