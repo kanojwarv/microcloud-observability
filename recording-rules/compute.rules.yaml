@@ -1,0 +1,18 @@
+groups:
+- name: microcloud-compute
+  interval: 30s
+  rules:
+  - record: vm_cpu_usage_seconds_rate
+    expr: sum by(name,host,project)(rate(lxd_cpu_seconds_total{mode!="idle"}[5m]))
+
+  - record: vm_network_rx_bytes_rate
+    expr: sum by(name)(rate(lxd_network_receive_bytes_total[5m]))
+
+  - record: vm_network_tx_bytes_rate
+    expr: sum by(name)(rate(lxd_network_transmit_bytes_total[5m]))
+
+  - record: vm_disk_read_bytes_rate
+    expr: sum by(name)(rate(lxd_disk_read_bytes_total[5m]))
+
+  - record: vm_disk_write_bytes_rate
+    expr: sum by(name)(rate(lxd_disk_written_bytes_total[5m]))

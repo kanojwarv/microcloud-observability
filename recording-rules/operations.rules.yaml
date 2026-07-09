@@ -1,0 +1,12 @@
+groups:
+- name: microcloud-operations
+  interval: 30s
+  rules:
+  - record: cluster_ceph_health
+    expr: ceph_health_status
+
+  - record: cluster_running_vm_count
+    expr: count(lxd_cpu_seconds_total{mode="user",state="RUNNING"})
+
+  - record: cluster_stopped_vm_count
+    expr: count(lxd_cpu_seconds_total{mode="user",state!="RUNNING"})

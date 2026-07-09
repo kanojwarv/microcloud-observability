@@ -1,0 +1,18 @@
+groups:
+- name: microcloud-storage
+  interval: 30s
+  rules:
+  - record: cluster_storage_total_bytes
+    expr: ceph_cluster_total_bytes
+
+  - record: cluster_storage_used_bytes
+    expr: ceph_cluster_total_used_bytes
+
+  - record: cluster_storage_used_percent
+    expr: 100 * ceph_cluster_total_used_bytes / ceph_cluster_total_bytes
+
+  - record: ceph_osd_up_count
+    expr: sum(ceph_osd_up)
+
+  - record: ceph_mon_quorum_count
+    expr: sum(ceph_mon_quorum_status)

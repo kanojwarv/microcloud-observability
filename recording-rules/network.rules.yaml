@@ -1,0 +1,9 @@
+groups:
+- name: microcloud-network
+  interval: 30s
+  rules:
+  - record: host_network_receive_bytes_rate
+    expr: sum by(instance)(rate(lxd_network_receive_bytes_total[5m]))
+
+  - record: host_network_transmit_bytes_rate
+    expr: sum by(instance)(rate(lxd_network_transmit_bytes_total[5m]))
