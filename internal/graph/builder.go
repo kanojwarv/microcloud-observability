@@ -1,6 +1,9 @@
 package graph
 
 import (
+	"os"
+	"path/filepath"
+
 	"github.com/kanojwarv/microcloud-observability/internal/loader"
 )
 
@@ -8,8 +11,20 @@ func Build() (*Graph, error) {
 
 	g := New()
 
-	dashboards, err := loader.LoadDashboards(
+	cwd, err := os.Getwd()
+	if err != nil {
+		return nil, err
+	}
+
+	dashboardsDir := filepath.Join(
+		cwd,
+		"..",
+		"..",
 		"dashboards",
+	)
+
+	dashboards, err := loader.LoadDashboards(
+		dashboardsDir,
 	)
 
 	if err != nil {

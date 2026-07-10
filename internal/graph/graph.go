@@ -41,3 +41,7 @@ func (g *Graph) DependentsOf(
 
 	return g.dependents[name]
 }
+
+func (g *Graph) Dependencies() map[string][]string {
+	return g.dependencies
+}
