@@ -39,6 +39,10 @@ func Execute(args []string) error {
 			validate.NewRecordingRulesValidator(),
 		)
 
+		engine.Register(
+			validate.NewVariablesValidator(),
+		)
+
 		report := engine.Run(
 			context.Background(),
 		)
