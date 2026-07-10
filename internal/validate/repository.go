@@ -19,3 +19,9 @@ func (r RepositoryValidator) Validate() Result {
 	res.Passed = okAll
 	return res
 }
+
+func NewRepositoryValidator() RepositoryValidator {
+	return RepositoryValidator{
+		Root: ".",
+	}
+}

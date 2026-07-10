@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/vishalkanojwar/microcloud-observability/pkg/validate"
+	"github.com/kanojwarv/microcloud-observability/internal/validate"
 )
 
 // Execute runs the CLI command.

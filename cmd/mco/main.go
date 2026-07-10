@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/vishalkanojwar/microcloud-observability/internal/cli"
+	"github.com/kanojwarv/microcloud-observability/internal/cli"
 	"os"
 )
 
