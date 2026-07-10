@@ -1,11 +1,28 @@
 package loader
 
 import (
+	"os"
+	"path/filepath"
 	"testing"
+
+	"github.com/kanojwarv/microcloud-observability/internal/model"
 )
 
 func TestLoadMetricsFile(t *testing.T) {
-	metrics, err := LoadMetricsFile("../../metrics/compute.yml")
+	cwd, err := os.Getwd()
+	if err != nil {
+		t.Fatalf("failed to get cwd: %v", err)
+	}
+
+	path := filepath.Join(
+		cwd,
+		"..",
+		"..",
+		"metrics",
+		"compute.yaml",
+	)
+
+	metrics, err := LoadMetricsFile(path)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -27,12 +44,16 @@ func TestLoadMetricsFile(t *testing.T) {
 		)
 	}
 
-	if first.Object != "vm" {
+	if first.Object != model.ObjectVM {
 		t.Fatalf(
 			"expected object %q, got %q",
-			"vm",
+			model.ObjectVM,
 			first.Object,
 		)
+	}
+
+	if first.RecordingRule == "" {
+		t.Fatal("expected recording rule")
 	}
 }
 

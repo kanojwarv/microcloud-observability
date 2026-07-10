@@ -3,7 +3,7 @@ package loader
 import (
 	"os"
 
-	"gopkg.in/yaml.v3"
+	"go.yaml.in/yaml/v3"
 
 	"github.com/kanojwarv/microcloud-observability/internal/model"
 )
