@@ -1,18 +1,7 @@
 Current Focus
 
-Metrics Registry
-
-Current Milestone
-
-Repository Compiler
+Recording Rules
 
 Current Issue
 
-Metrics Loader
-
-Definition of Done
-
-- Load metrics YAML
-- Convert to domain model
-- Unit tests pass
-- Build passes
+Recording Rules Domain Model
