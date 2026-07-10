@@ -29,14 +29,14 @@ func Execute(args []string) error {
 			validate.NewRepositoryValidator(),
 		)
 
-		results := engine.Run(
+		report := engine.Run(
 			context.Background(),
 		)
 
 		fmt.Println("MicroCloud Observability")
 		fmt.Println("========================")
 
-		for _, result := range results {
+		for _, result := range report.Results {
 			fmt.Printf(
 				"%s: %t\n",
 				result.Name,
