@@ -2,6 +2,7 @@ package cli
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"github.com/kanojwarv/microcloud-observability/internal/validate"
@@ -74,6 +75,18 @@ func Execute(args []string) error {
 	case "graph":
 		return executeGraph()
 
+	case "impact":
+
+		if len(args) < 2 {
+			return errors.New(
+				"usage: mco impact <artifact>",
+			)
+		}
+
+		return executeImpact(
+			args[1],
+		)
+
 	default:
 		printHelp()
 		return fmt.Errorf("unknown command: %s", args[0])
@@ -90,8 +103,9 @@ func printHelp() {
 
         validate     Validate the repository
         version      Show version information
-        help         Show this help message
+		impact       Show artifact impact
 		graph        Show dependency graph
+		help         Show this help message
 
     Examples:
 
