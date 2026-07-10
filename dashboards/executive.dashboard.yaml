@@ -1,0 +1,38 @@
+dashboard:
+  name: executive
+
+  title: Executive Overview
+
+  variables:
+    - cluster
+    - host
+
+  sections:
+
+    - title: Platform Health
+
+      panels:
+
+        - title: CPU Usage
+          metric: vm_cpu_usage_seconds_rate
+          type: stat
+
+        - title: Disk Read
+          metric: vm_disk_read_bytes_rate
+          type: stat
+
+        - title: Disk Write
+          metric: vm_disk_write_bytes_rate
+          type: stat
+
+    - title: Network
+
+      panels:
+
+        - title: Network RX
+          metric: vm_network_rx_bytes_rate
+          type: timeseries
+
+        - title: Network TX
+          metric: vm_network_tx_bytes_rate
+          type: timeseries
