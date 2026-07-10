@@ -1,15 +1,18 @@
-# NOW
-
 Current Focus
 
-Platform Core
+Metrics Registry
 
-Current Goal
+Current Milestone
 
-Validation Engine
+Repository Compiler
 
-Next Commit
+Current Issue
 
-Validation Engine Framework
+Metrics Loader
 
-Everything else is intentionally postponed.
+Definition of Done
+
+- Load metrics YAML
+- Convert to domain model
+- Unit tests pass
+- Build passes
