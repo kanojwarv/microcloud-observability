@@ -31,6 +31,10 @@ func Execute(args []string) error {
 			validate.NewRepositoryValidator(),
 		)
 
+		engine.Register(
+			validate.NewMetricsValidator(),
+		)
+
 		report := engine.Run(
 			context.Background(),
 		)
@@ -39,10 +43,17 @@ func Execute(args []string) error {
 		fmt.Println("========================")
 
 		for _, result := range report.Results {
+
+			status := "FAIL"
+
+			if result.Passed {
+				status = "PASS"
+			}
+
 			fmt.Printf(
-				"%s: %t\n",
+				"%-15s %s\n",
 				result.Name,
-				result.Passed,
+				status,
 			)
 		}
 
