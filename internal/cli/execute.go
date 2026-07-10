@@ -75,6 +75,9 @@ func Execute(args []string) error {
 	case "graph":
 		return executeGraph()
 
+	case "doctor":
+		return executeDoctor()
+
 	case "impact":
 
 		if len(args) < 2 {
@@ -105,6 +108,7 @@ func printHelp() {
         version      Show version information
 		impact       Show artifact impact
 		graph        Show dependency graph
+		doctor       Check repository health
 		help         Show this help message
 
     Examples:
