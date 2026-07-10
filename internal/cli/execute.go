@@ -71,6 +71,9 @@ func Execute(args []string) error {
 
 		return nil
 
+	case "graph":
+		return executeGraph()
+
 	default:
 		printHelp()
 		return fmt.Errorf("unknown command: %s", args[0])
@@ -88,6 +91,7 @@ func printHelp() {
         validate     Validate the repository
         version      Show version information
         help         Show this help message
+		graph        Show dependency graph
 
     Examples:
 
