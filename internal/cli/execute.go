@@ -43,6 +43,10 @@ func Execute(args []string) error {
 			validate.NewVariablesValidator(),
 		)
 
+		engine.Register(
+			validate.NewDashboardValidator(),
+		)
+
 		report := engine.Run(
 			context.Background(),
 		)
