@@ -1,12 +1,30 @@
 package model
 
 type Metric struct {
-	Name        string
-	Description string
-	Unit        string
+	Metric        string
+	Object        Object
+	Category      Category
+	Unit          string
+	RecordingRule string
+	Dashboards    []string
+	Alerts        []string
+}
 
-	Category Category
-	Object   Object
+package model
 
-	Labels []string
+// Metric describes a metric definition.
+type Metric struct {
+	Metric        string   `yaml:"metric"`
+	Object        Object   `yaml:"object"`
+	Category      Category `yaml:"category"`
+	Unit          string   `yaml:"unit"`
+
+	RecordingRule string   `yaml:"recording_rule"`
+	Dashboards    []string `yaml:"dashboards"`
+	Alerts        []string `yaml:"alerts"`
+}
+
+// MetricsFile represents a metrics YAML file.
+type MetricsFile struct {
+	Metrics []Metric `yaml:"metrics"`
 }

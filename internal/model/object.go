@@ -3,9 +3,9 @@ package model
 type Object string
 
 const (
-	ObjectCluster Object = "cluster"
-	ObjectHost    Object = "host"
 	ObjectVM      Object = "vm"
+	ObjectHost    Object = "host"
+	ObjectCluster Object = "cluster"
 	ObjectPool    Object = "pool"
 	ObjectOSD     Object = "osd"
 )

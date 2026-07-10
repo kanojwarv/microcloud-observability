@@ -53,7 +53,6 @@ func Execute(args []string) error {
 		return fmt.Errorf("unknown command: %s", args[0])
 	}
 }
-
 func printHelp() {
 	fmt.Println(`MicroCloud Observability
 
