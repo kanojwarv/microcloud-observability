@@ -25,18 +25,49 @@ func GraphHTML(
     <title>MicroCloud Observability</title>
 
     <style>
-        body {
-            font-family: sans-serif;
-            margin: 40px;
-        }
+			body {
+    			font-family: Arial, sans-serif;
+    			background-color: #f5f5f5;
+    			padding: 40px;
+			}
 
-        h1 {
-            margin-bottom: 30px;
-        }
+			h1 {
+    			text-align: center;
+    			margin-bottom: 40px;
+			}
 
-        ul {
-            margin-bottom: 20px;
-        }
+			.graph {
+    			margin-bottom: 50px;
+			}
+
+			.node {
+    			background: white;
+    			border: 2px solid #333;
+    			border-radius: 10px;
+    			padding: 16px;
+    			width: 320px;
+    			margin: auto;
+    			text-align: center;
+    			font-size: 20px;
+    			font-weight: bold;
+			}
+
+			.dependencies {
+    			margin-top: 24px;
+    			display: flex;
+    			flex-direction: column;
+    			align-items: center;
+    			gap: 12px;
+			}
+
+			.dependency {
+    			background: white;
+    			border: 1px solid #888;
+    			border-radius: 8px;
+    			padding: 12px;
+    			width: 280px;
+    			text-align: center;
+			}
     </style>
 </head>
 
@@ -47,20 +78,30 @@ func GraphHTML(
 
 	for artifact, dependencies := range g.Dependencies() {
 
-		html += fmt.Sprintf(
-			"<h2>%s</h2><ul>",
-			artifact,
-		)
+		html += fmt.Sprintf(`
+        <div class="graph">
+
+            <div class="node">
+                %s
+            </div>
+
+            <div class="dependencies">
+    `, artifact)
 
 		for _, dependency := range dependencies {
 
-			html += fmt.Sprintf(
-				"<li>%s</li>",
-				dependency,
-			)
+			html += fmt.Sprintf(`
+            <div class="dependency">
+                %s
+            </div>
+        `, dependency)
 		}
 
-		html += "</ul>"
+		html += `
+            </div>
+
+        </div>
+    `
 	}
 
 	html += `
