@@ -18,7 +18,7 @@ Current capabilities:
 - Local web server
 - HTTP APIs
 
-Architecture:-
+## Architecture:-
 
 
                     +----------------+
@@ -59,7 +59,7 @@ Architecture:-
                     +----------------+
 
 
-Repository Layout:-
+## Repository Layout:-
 
 .
 ├── artifacts/
@@ -81,7 +81,6 @@ Repository Layout:-
 │   └── validate/
 └── Makefile
 
-Quick Start:-
 
 ## Quick Start
 
@@ -109,7 +108,6 @@ Open:
 http://localhost:8080
 ```
 
-CLI Commands:-
 
 ## CLI
 
@@ -129,7 +127,6 @@ CLI Commands:-
 ./bin/mco serve
 ```
 
-HTTP API's:-
 
 ## HTTP APIs
 
@@ -139,14 +136,12 @@ GET /api/graph
 GET /api/doctor
 ```
 
-Generated Artifacts:-
 
 ## Generated Artifacts
 
 - artifacts/graph.json
 - artifacts/graph.html
 
-RoadMap:-
 
 ## Roadmap
 
@@ -172,4 +167,4 @@ RoadMap:-
 
 ---
 
-Built one commit at a time.
+Built one commit at a time.#
