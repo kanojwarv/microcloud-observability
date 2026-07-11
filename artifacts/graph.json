@@ -3,6 +3,9 @@
     "vm_cpu_usage_seconds_rate",
     "vm_disk_read_bytes_rate",
     "vm_disk_write_bytes_rate",
+    "vm_memory_usage_bytes",
+    "vm_test_metric",
+    "vm_test_watch",
     "vm_network_rx_bytes_rate",
     "vm_network_tx_bytes_rate"
   ]

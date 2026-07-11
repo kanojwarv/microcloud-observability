@@ -1,10 +1,26 @@
 package generate
 
+import (
+	"os"
+	"path/filepath"
+)
+
 func All(
 	repositoryRoot string,
 ) error {
 
-	_, err := GraphJSON(
+	outputDir := "artifacts"
+
+	err := os.MkdirAll(
+		outputDir,
+		0755,
+	)
+
+	if err != nil {
+		return err
+	}
+
+	graphJSON, err := GraphJSON(
 		repositoryRoot,
 	)
 
@@ -12,8 +28,34 @@ func All(
 		return err
 	}
 
-	_, err = GraphHTML(
+	err = os.WriteFile(
+		filepath.Join(
+			outputDir,
+			"graph.json",
+		),
+		graphJSON,
+		0644,
+	)
+
+	if err != nil {
+		return err
+	}
+
+	graphHTML, err := GraphHTML(
 		repositoryRoot,
+	)
+
+	if err != nil {
+		return err
+	}
+
+	err = os.WriteFile(
+		filepath.Join(
+			outputDir,
+			"graph.html",
+		),
+		graphHTML,
+		0644,
 	)
 
 	if err != nil {

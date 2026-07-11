@@ -25,6 +25,18 @@ dashboard:
           metric: vm_disk_write_bytes_rate
           type: stat
 
+        - title: Memory Usage
+          metric: vm_memory_usage_bytes
+          type: stat
+
+        - title: Test Memory
+          metric: vm_test_metric
+          type: stat
+
+        - title: Test Metric Watch
+          metric: vm_test_watch
+          type: stat
+
     - title: Network
 
       panels:

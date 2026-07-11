@@ -104,6 +104,9 @@ func Execute(args []string) error {
 	case "serve":
 		return executeServe()
 
+	case "watch":
+		return executeWatch()
+
 	default:
 		printHelp()
 		return fmt.Errorf("unknown command: %s", args[0])
@@ -121,10 +124,10 @@ func printHelp() {
         validate     Validate the repository
         version      Show version information
 		impact       Show artifact impact
-		generate.    Generate artifacts
+		generate     Generate artifacts
 	    graph        Show dependency graph
         doctor       Check repository health
-
+		watch        Watch repository changes		 
 		help         Show this help message
 
     Examples:

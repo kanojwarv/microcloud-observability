@@ -96,6 +96,19 @@ func executeGenerate(
 		)
 
 		return nil
+
+	case "all":
+
+		err := generate.All(".")
+
+		if err != nil {
+			return err
+		}
+
+		fmt.Println("Generated:")
+		fmt.Println("    artifacts")
+
+		return nil
 	}
 
 	return fmt.Errorf(
