@@ -121,12 +121,16 @@ func printHelp() {
 		generate.    Generate artifacts
 	    graph        Show dependency graph
         doctor       Check repository health
+
 		help         Show this help message
 
     Examples:
 
         mco validate
         mco version
+		mco generate graph
+		mco generate graph-html
         mco help
+
     `)
 }

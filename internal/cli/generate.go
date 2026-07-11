@@ -60,6 +60,42 @@ func executeGenerate(
 		)
 
 		return nil
+
+	case "graph-html":
+
+		data, err := generate.GraphHTML(
+			".",
+		)
+
+		if err != nil {
+			return err
+		}
+
+		outputPath := filepath.Join(
+			"artifacts",
+			"graph.html",
+		)
+
+		err = os.WriteFile(
+			outputPath,
+			data,
+			0644,
+		)
+
+		if err != nil {
+			return err
+		}
+
+		fmt.Println(
+			"Generated:",
+		)
+
+		fmt.Printf(
+			"    %s\n",
+			outputPath,
+		)
+
+		return nil
 	}
 
 	return fmt.Errorf(
