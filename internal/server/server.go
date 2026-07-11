@@ -113,6 +113,11 @@ func Start(
 		},
 	)
 
+	http.HandleFunc(
+		"/api/impact/",
+		handleImpact,
+	)
+
 	return http.ListenAndServe(
 		addr,
 		nil,
