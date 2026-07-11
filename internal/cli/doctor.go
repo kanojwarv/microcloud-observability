@@ -8,7 +8,7 @@ import (
 
 func executeDoctor() error {
 
-	health := doctor.Check()
+	report := doctor.Run()
 
 	fmt.Println(
 		"Repository Health",
@@ -20,15 +20,24 @@ func executeDoctor() error {
 
 	fmt.Println()
 
-	fmt.Println(
-		health.Status,
+	fmt.Printf(
+		"Overall Status: %s\n\n",
+		report.Status,
 	)
 
-	fmt.Println()
+	for _, check := range report.Checks {
 
-	fmt.Println(
-		health.Message,
-	)
+		fmt.Printf(
+			"[%s] %s\n",
+			check.Status,
+			check.Name,
+		)
+
+		fmt.Printf(
+			"    %s\n\n",
+			check.Message,
+		)
+	}
 
 	return nil
 }

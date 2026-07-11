@@ -83,7 +83,7 @@ func Start(
 			r *http.Request,
 		) {
 
-			health := doctor.Check()
+			health := doctor.Run()
 
 			data, err := json.MarshalIndent(
 				health,

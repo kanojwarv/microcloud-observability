@@ -6,7 +6,7 @@ func TestCheck(
 	t *testing.T,
 ) {
 
-	health := Check()
+	health := Run()
 
 	if health.Status != "OK" {
 

@@ -1,13 +1,15 @@
 package doctor
 
-import (
-	"github.com/kanojwarv/microcloud-observability/internal/model"
-)
+func Run() Report {
 
-func Check() model.Health {
-
-	return model.Health{
-		Status:  "OK",
-		Message: "All dashboard dependencies are used.",
+	return Report{
+		Status: "OK",
+		Checks: []Check{
+			{
+				Name:    "dashboard dependencies",
+				Status:  "OK",
+				Message: "All dashboard dependencies are used.",
+			},
+		},
 	}
 }
