@@ -3,52 +3,32 @@ package cli
 import (
 	"fmt"
 
-	"github.com/kanojwarv/microcloud-observability/internal/graph"
+	"github.com/kanojwarv/microcloud-observability/internal/doctor"
 )
 
 func executeDoctor() error {
 
-	g, err := graph.Build(".")
+	health := doctor.Check()
 
-	if err != nil {
-		return err
-	}
-
-	fmt.Println("Repository Health")
-	fmt.Println("=================")
-	fmt.Println()
-
-	found := false
-
-	dependencies := g.DependenciesOf(
-		"executive",
+	fmt.Println(
+		"Repository Health",
 	)
 
-	if len(dependencies) == 0 {
+	fmt.Println(
+		"=================",
+	)
 
-		found = true
+	fmt.Println()
 
-		fmt.Println(
-			"WARNING",
-		)
+	fmt.Println(
+		health.Status,
+	)
 
-		fmt.Println(
-			"dashboard has no dependencies",
-		)
-	}
+	fmt.Println()
 
-	if !found {
-
-		fmt.Println(
-			"OK",
-		)
-
-		fmt.Println()
-
-		fmt.Println(
-			"All dashboard dependencies are used.",
-		)
-	}
+	fmt.Println(
+		health.Message,
+	)
 
 	return nil
 }
