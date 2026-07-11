@@ -105,6 +105,19 @@ func GraphHTML(
 	}
 
 	html += `
+		<script>
+
+		setInterval(
+		function () {
+
+		window.location.reload()
+
+		},
+		5000,
+		)
+
+		</script>
+
 </body>
 </html>
 `
