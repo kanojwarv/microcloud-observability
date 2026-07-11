@@ -2,6 +2,8 @@ package server
 
 import (
 	"net/http"
+
+	"github.com/kanojwarv/microcloud-observability/internal/generate"
 )
 
 func Start(
@@ -34,6 +36,39 @@ func Start(
 			).ServeHTTP(
 				w,
 				r,
+			)
+		},
+	)
+
+	http.HandleFunc(
+		"/api/graph",
+		func(
+			w http.ResponseWriter,
+			r *http.Request,
+		) {
+
+			data, err := generate.GraphJSON(
+				".",
+			)
+
+			if err != nil {
+
+				http.Error(
+					w,
+					err.Error(),
+					http.StatusInternalServerError,
+				)
+
+				return
+			}
+
+			w.Header().Set(
+				"Content-Type",
+				"application/json",
+			)
+
+			w.Write(
+				data,
 			)
 		},
 	)
