@@ -21,59 +21,106 @@ func GraphHTML(
 	html := `
 <!DOCTYPE html>
 <html>
+
 <head>
+
     <title>MicroCloud Observability</title>
 
     <style>
-			body {
-    			font-family: Arial, sans-serif;
-    			background-color: #f5f5f5;
-    			padding: 40px;
-			}
 
-			h1 {
-    			text-align: center;
-    			margin-bottom: 40px;
-			}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 40px;
+        }
 
-			.graph {
-    			margin-bottom: 50px;
-			}
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-			.node {
-    			background: white;
-    			border: 2px solid #333;
-    			border-radius: 10px;
-    			padding: 16px;
-    			width: 320px;
-    			margin: auto;
-    			text-align: center;
-    			font-size: 20px;
-    			font-weight: bold;
-			}
+        .graph {
+            margin-bottom: 50px;
+        }
 
-			.dependencies {
-    			margin-top: 24px;
-    			display: flex;
-    			flex-direction: column;
-    			align-items: center;
-    			gap: 12px;
-			}
+        .node {
+            background: white;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 16px;
+            width: 320px;
+            margin: auto;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-			.dependency {
-    			background: white;
-    			border: 1px solid #888;
-    			border-radius: 8px;
-    			padding: 12px;
-    			width: 280px;
-    			text-align: center;
-			}
+        .dependencies {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .dependency {
+            background: white;
+            border: 1px solid #888;
+            border-radius: 8px;
+            padding: 12px;
+            width: 280px;
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: transform 0.2s ease;
+        }
+
+        .dependency:hover {
+            transform: scale(
+                1.05
+            );
+        }
+
+        #impact-panel {
+            position: fixed;
+
+            top: 40px;
+            right: 40px;
+
+            width: 320px;
+
+            background: white;
+
+            border: 2px solid #333;
+
+            border-radius: 10px;
+
+            padding: 20px;
+
+            box-shadow: 0 4px 12px rgba(
+                0,
+                0,
+                0,
+                0.15
+            );
+        }
+
     </style>
+
 </head>
 
 <body>
 
-<h1>Dependency Graph</h1>
+    <h1>Dependency Graph</h1>
+
+    <div id="impact-panel">
+
+        <h2>Impact Analysis</h2>
+
+        <p>Select a metric...</p>
+
+    </div>
 `
 
 	for artifact, dependencies := range g.Dependencies() {
@@ -91,10 +138,13 @@ func GraphHTML(
 		for _, dependency := range dependencies {
 
 			html += fmt.Sprintf(`
-            <div class="dependency">
-                %s
-            </div>
-        `, dependency)
+    			<div
+        		class="dependency"
+        		onclick="showImpact('%s')"
+    			>
+        		%s
+    			</div>
+				`, dependency, dependency)
 		}
 
 		html += `
@@ -105,20 +155,68 @@ func GraphHTML(
 	}
 
 	html += `
-		<script>
+<script>
 
-		setInterval(
-		function () {
+async function showImpact(
+    artifact,
+) {
 
-		window.location.reload()
+    const response = await fetch(
+        "/api/impact/" + artifact,
+    )
 
-		},
-		5000,
-		)
+    if (!response.ok) {
 
-		</script>
+        document.getElementById(
+            "impact-panel",
+        ).innerHTML =
+            "<h2>Impact Analysis</h2>" +
+            "<p>Artifact not found.</p>"
+
+        return
+    }
+
+    const data = await response.json()
+
+    let html =
+        "<h2>Impact Analysis</h2>" +
+        "<p><strong>Artifact:</strong> " +
+        data.artifact +
+        "</p>" +
+        "<h3>Referenced by</h3>" +
+        "<ul>"
+
+    for (
+        const item
+        of data.referencedBy
+    ) {
+
+        html +=
+            "<li>" +
+            item +
+            "</li>"
+    }
+
+    html += "</ul>"
+
+    document.getElementById(
+        "impact-panel",
+    ).innerHTML = html
+}
+
+setInterval(
+    function () {
+
+        window.location.reload()
+
+    },
+    5000,
+)
+
+</script>
 
 </body>
+
 </html>
 `
 
