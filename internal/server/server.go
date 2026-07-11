@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"net/http"
 )
 
@@ -16,9 +15,25 @@ func Start(
 			r *http.Request,
 		) {
 
-			fmt.Fprintf(
+			if r.URL.Path == "/" {
+
+				http.Redirect(
+					w,
+					r,
+					"/graph.html",
+					http.StatusFound,
+				)
+
+				return
+			}
+
+			http.FileServer(
+				http.Dir(
+					"artifacts",
+				),
+			).ServeHTTP(
 				w,
-				"MicroCloud Observability",
+				r,
 			)
 		},
 	)
