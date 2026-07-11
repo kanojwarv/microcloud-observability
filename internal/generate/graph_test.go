@@ -8,7 +8,9 @@ func TestGraphJSON(
 	t *testing.T,
 ) {
 
-	data, err := GraphJSON()
+	data, err := GraphJSON(
+		"../..",
+	)
 
 	if err != nil {
 		t.Fatalf(

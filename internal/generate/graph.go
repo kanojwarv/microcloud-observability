@@ -6,9 +6,13 @@ import (
 	"github.com/kanojwarv/microcloud-observability/internal/graph"
 )
 
-func GraphJSON() ([]byte, error) {
+func GraphJSON(
+	repositoryRoot string,
+) ([]byte, error) {
 
-	g, err := graph.Build()
+	g, err := graph.Build(
+		repositoryRoot,
+	)
 	if err != nil {
 		return nil, err
 	}

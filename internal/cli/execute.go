@@ -89,6 +89,17 @@ func Execute(args []string) error {
 		return executeImpact(
 			args[1],
 		)
+	case "generate":
+
+		if len(args) < 2 {
+			return errors.New(
+				"usage: mco generate <graph>",
+			)
+		}
+
+		return executeGenerate(
+			args[1],
+		)
 
 	default:
 		printHelp()
@@ -107,8 +118,9 @@ func printHelp() {
         validate     Validate the repository
         version      Show version information
 		impact       Show artifact impact
-		graph        Show dependency graph
-		doctor       Check repository health
+		generate.    Generate artifacts
+	    graph        Show dependency graph
+        doctor       Check repository health
 		help         Show this help message
 
     Examples:

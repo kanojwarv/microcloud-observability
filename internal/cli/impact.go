@@ -10,7 +10,7 @@ func executeImpact(
 	artifact string,
 ) error {
 
-	g, err := graph.Build()
+	g, err := graph.Build(".")
 
 	if err != nil {
 		return err

@@ -1,25 +1,19 @@
 package graph
 
 import (
-	"os"
 	"path/filepath"
 
 	"github.com/kanojwarv/microcloud-observability/internal/loader"
 )
 
-func Build() (*Graph, error) {
+func Build(
+	repositoryRoot string,
+) (*Graph, error) {
 
 	g := New()
 
-	cwd, err := os.Getwd()
-	if err != nil {
-		return nil, err
-	}
-
 	dashboardsDir := filepath.Join(
-		cwd,
-		"..",
-		"..",
+		repositoryRoot,
 		"dashboards",
 	)
 
