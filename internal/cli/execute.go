@@ -101,6 +101,9 @@ func Execute(args []string) error {
 			args[1],
 		)
 
+	case "serve":
+		return executeServe()
+
 	default:
 		printHelp()
 		return fmt.Errorf("unknown command: %s", args[0])
