@@ -7,7 +7,7 @@ import (
 
 func TestRecordingRulesValidator(t *testing.T) {
 	validator := RecordingRulesValidator{
-		Path: "../../recording-rules/compute.rules.yaml",
+		Path: "../../recordingrules/compute.rules.yaml",
 	}
 
 	result := validator.Validate(context.Background())

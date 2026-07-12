@@ -8,7 +8,7 @@ import (
 
 func executeDoctor() error {
 
-	report := doctor.Run()
+	report := doctor.Run(".")
 
 	fmt.Println(
 		"Repository Health",

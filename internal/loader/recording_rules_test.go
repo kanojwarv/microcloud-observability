@@ -22,7 +22,7 @@ func TestLoadRecordingRuleFile(
 		cwd,
 		"..",
 		"..",
-		"recording-rules",
+		"recordingrules",
 		"compute.rules.yaml",
 	)
 

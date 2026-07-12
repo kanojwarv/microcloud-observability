@@ -1,15 +1,36 @@
 package doctor
 
-func Run() Report {
+func Run(
+	repositoryRoot string,
+) Report {
+
+	checks := []Check{
+
+		CheckDashboards(
+			repositoryRoot,
+		),
+
+		CheckMetrics(
+			repositoryRoot,
+		),
+
+		CheckRecordingRules(
+			repositoryRoot,
+		),
+
+		CheckVariables(
+			repositoryRoot,
+		),
+
+		CheckAlerts(
+			repositoryRoot,
+		),
+	}
 
 	return Report{
-		Status: "OK",
-		Checks: []Check{
-			{
-				Name:    "dashboard dependencies",
-				Status:  "OK",
-				Message: "All dashboard dependencies are used.",
-			},
-		},
+		Status: overallStatus(
+			checks,
+		),
+		Checks: checks,
 	}
 }
