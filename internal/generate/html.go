@@ -105,6 +105,31 @@ func GraphHTML(
                 0.15
             );
         }
+		#doctor-panel {
+
+    		position: fixed;
+
+    		top: 320px;
+
+    		right: 40px;
+
+    		width: 320px;
+
+    		background: white;
+
+    		border: 2px solid #333;
+
+    		border-radius: 10px;
+
+    		padding: 20px;
+
+    		box-shadow: 0 4px 12px rgba(
+        		0,
+        		0,
+        		0,
+        		0.15
+    		);
+		}
 
     </style>
 
@@ -121,6 +146,13 @@ func GraphHTML(
         <p>Select a metric...</p>
 
     </div>
+		<div id="doctor-panel">
+
+    	<h2>Repository Health</h2>
+
+    	<p>Loading...</p>
+
+	</div>
 `
 
 	for artifact, dependencies := range g.Dependencies() {
@@ -155,63 +187,99 @@ func GraphHTML(
 	}
 
 	html += `
-<script>
+		<script>
 
-async function showImpact(
-    artifact,
-) {
+		async function showImpact(
+			artifact,
+		) {
 
-    const response = await fetch(
-        "/api/impact/" + artifact,
-    )
+			const response = await fetch(
+				"/api/impact/" + artifact,
+			)
 
-    if (!response.ok) {
+			if (!response.ok) {
 
-        document.getElementById(
-            "impact-panel",
-        ).innerHTML =
-            "<h2>Impact Analysis</h2>" +
-            "<p>Artifact not found.</p>"
+				document.getElementById(
+					"impact-panel",
+				).innerHTML =
+					"<h2>Impact Analysis</h2>" +
+					"<p>Artifact not found.</p>"
 
-        return
-    }
+				return
+			}
 
-    const data = await response.json()
+			const data = await response.json()
 
-    let html =
-        "<h2>Impact Analysis</h2>" +
-        "<p><strong>Artifact:</strong> " +
-        data.artifact +
-        "</p>" +
-        "<h3>Referenced by</h3>" +
-        "<ul>"
+			let html =
+				"<h2>Impact Analysis</h2>" +
+				"<p><strong>Artifact:</strong> " +
+				data.artifact +
+				"</p>" +
+				"<h3>Referenced by</h3>" +
+				"<ul>"
 
-    for (
-        const item
-        of data.referencedBy
-    ) {
+			for (
+				const item
+				of data.referencedBy
+			) {
 
-        html +=
-            "<li>" +
-            item +
-            "</li>"
-    }
+				html +=
+					"<li>" +
+					item +
+					"</li>"
+			}
 
-    html += "</ul>"
+			html += "</ul>"
 
-    document.getElementById(
-        "impact-panel",
-    ).innerHTML = html
-}
+			document.getElementById(
+				"impact-panel",
+			).innerHTML = html
+		}
 
-setInterval(
-    function () {
+		async function refreshDoctor() {
 
-        window.location.reload()
+			const response = await fetch(
+				"/api/doctor",
+			)
 
-    },
-    5000,
-)
+			const data = await response.json()
+
+			let html =
+				"<h2>Repository Health</h2>"
+
+			for (
+				const check
+				of data.checks
+			) {
+
+				html +=
+					"<p>" +
+					check.status +
+					" : " +
+					check.name +
+					"</p>"
+
+				html +=
+					"<small>" +
+					check.message +
+					"</small>"
+			}
+
+			document.getElementById(
+				"doctor-panel",
+			).innerHTML = html
+		}
+		
+		refreshDoctor()
+
+		setInterval(
+			function () {
+
+				window.location.reload()
+
+			},
+			5000,
+		)
 
 </script>
 
