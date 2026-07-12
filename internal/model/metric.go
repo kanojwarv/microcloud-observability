@@ -10,6 +10,7 @@ type Metric struct {
 	RecordingRule string   `yaml:"recording_rule"`
 	Dashboards    []string `yaml:"dashboards"`
 	Alerts        []string `yaml:"alerts"`
+	Source        string   `yaml:"-"`
 }
 
 // MetricsFile represents a metrics YAML file.

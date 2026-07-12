@@ -107,6 +107,11 @@ func Execute(args []string) error {
 	case "watch":
 		return executeWatch()
 
+	case "search":
+		return executeSearch(
+			args[1],
+		)
+
 	default:
 		printHelp()
 		return fmt.Errorf("unknown command: %s", args[0])
@@ -127,7 +132,8 @@ func printHelp() {
 		generate     Generate artifacts
 	    graph        Show dependency graph
         doctor       Check repository health
-		watch        Watch repository changes		 
+		watch        Watch repository changes
+		search		 Search the metrics		 
 		help         Show this help message
 
     Examples:
