@@ -130,6 +130,25 @@ func GraphHTML(
         		0.15
     		);
 		}
+		
+		#search-panel {
+
+    	position: fixed;
+
+    	top: 40px;
+
+    	left: 40px;
+
+    	width: 320px;
+
+    	background: white;
+
+    	border: 2px solid #333;
+
+    	border-radius: 10px;
+
+    	padding: 20px;
+		}
 
     </style>
 
@@ -153,6 +172,35 @@ func GraphHTML(
     	<p>Loading...</p>
 
 	</div>
+	<div id="search-panel">
+
+    	<h2>Repository Search</h2>
+
+    	<input
+        	id="search-input"
+        	placeholder="Search..."
+    	>
+
+    	<button
+        	onclick="performSearch()"
+    	>
+        	Search
+    	</button>
+		<button
+        id="resume-button"
+        onclick="resumeRefresh()"
+        style="display: none;"
+    	>
+        Resume Live Updates
+        </button>
+
+    	<div id="search-results">
+
+        	<p>No search yet.</p>
+
+    	</div>
+
+</div>
 `
 
 	for artifact, dependencies := range g.Dependencies() {
@@ -188,6 +236,8 @@ func GraphHTML(
 
 	html += `
 		<script>
+
+		let autoRefresh = true
 
 		async function showImpact(
 			artifact,
@@ -272,13 +322,74 @@ func GraphHTML(
 		
 		refreshDoctor()
 
+		async function performSearch() {
+
+			autoRefresh = false
+
+			document.getElementById(
+    		"resume-button",
+			).style.display = "block"
+
+    		const query = document.getElementById(
+        	"search-input",
+    		).value
+
+    		const response = await fetch(
+        	"/api/search?q=" + query,
+    		)
+
+    		const data = await response.json()
+
+    		let html = ""
+
+    		for (
+        		const result
+        		of data.results
+    		) {
+
+        	html +=
+            	"<p><strong>" +
+            	result.kind +
+            	"</strong></p>"
+
+        	html +=
+            	"<p>" +
+            	result.name +
+            	"</p>"
+
+        	html +=
+            	"<small>" +
+            	result.path +
+            	"</small><hr>"
+    		}
+
+    		document.getElementById(
+        	"search-results",
+    		).innerHTML = html
+		}
+		
+		function resumeRefresh() {
+
+    		autoRefresh = true
+
+    		document.getElementById(
+        	"resume-button",
+    		).style.display = "none"
+
+   			 window.location.reload()
+		}
+
+
 		setInterval(
-			function () {
+    		function () {
 
-				window.location.reload()
+        	if (autoRefresh) {
 
-			},
-			5000,
+            	window.location.reload()
+        	}
+
+    	},
+    	5000,
 		)
 
 </script>
