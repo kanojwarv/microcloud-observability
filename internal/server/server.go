@@ -118,6 +118,11 @@ func Start(
 		handleImpact,
 	)
 
+	http.HandleFunc(
+		"/api/search",
+		handleSearch,
+	)
+
 	return http.ListenAndServe(
 		addr,
 		nil,
