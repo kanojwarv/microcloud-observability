@@ -112,6 +112,9 @@ func Execute(args []string) error {
 			args[1],
 		)
 
+	case "inspect":
+		return executeInspect()
+
 	default:
 		printHelp()
 		return fmt.Errorf("unknown command: %s", args[0])
@@ -133,7 +136,8 @@ func printHelp() {
 	    graph        Show dependency graph
         doctor       Check repository health
 		watch        Watch repository changes
-		search		 Search the metrics		 
+		search		 Search the metrics
+		inspect		 To inspect all the repository status	 
 		help         Show this help message
 
     Examples:

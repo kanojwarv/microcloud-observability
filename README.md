@@ -164,6 +164,42 @@ GET /api/doctor
 - [ ] Perses generation
 - [ ] API server expansion
 
+## Repository Inspection
+
+Validate that the repository is healthy and that all core
+subsystems are operational:
+
+```bash
+./bin/mco inspect
+```
+
+Example output:
+
+```text
+Repository Inspection
+=====================
+
+[OK] Graph
+
+[OK] Search
+
+[OK] Impact
+
+[OK] Doctor
+    repository status: WARN
+```
+
+The inspection command verifies:
+
+- Dependency graph generation
+- Repository search
+- Impact analysis
+- Repository health
+
+A WARN status indicates that the repository is incomplete
+(for example, missing alerts), while an ERROR status indicates
+that a subsystem is broken.
+```
 
 ---
 
