@@ -169,6 +169,9 @@ GET /api/doctor
 Validate that the repository is healthy and that all core
 subsystems are operational:
 
+Before leaving a station, run:
+
+
 ```bash
 ./bin/mco inspect
 ```
