@@ -11,6 +11,7 @@ type Dashboard struct {
 	Title     string    `yaml:"title"`
 	Variables []string  `yaml:"variables"`
 	Sections  []Section `yaml:"sections"`
+	Source    string    `yaml:"-"`
 }
 
 // Section represents a logical grouping of panels.

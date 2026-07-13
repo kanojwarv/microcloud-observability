@@ -27,12 +27,12 @@ func Build(
 
 	for _, dashboard := range dashboards {
 
-		for _, section := range dashboard.Dashboard.Sections {
+		for _, section := range dashboard.Sections {
 
 			for _, panel := range section.Panels {
 
 				g.AddDependency(
-					dashboard.Dashboard.Name,
+					dashboard.Name,
 					panel.Metric,
 				)
 			}

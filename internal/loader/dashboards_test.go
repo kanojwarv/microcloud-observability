@@ -46,7 +46,7 @@ func TestLoadDashboards(
 
 	for _, dashboard := range dashboards {
 
-		if dashboard.Dashboard.Name == "executive" {
+		if dashboard.Name == "executive" {
 
 			found = true
 			break

@@ -10,9 +10,9 @@ import (
 
 func LoadDashboards(
 	dir string,
-) ([]model.DashboardFile, error) {
+) ([]model.Dashboard, error) {
 
-	var dashboards []model.DashboardFile
+	var dashboards []model.Dashboard
 
 	files, err := os.ReadDir(dir)
 	if err != nil {
@@ -43,9 +43,14 @@ func LoadDashboards(
 			return nil, err
 		}
 
+		dashboard.Dashboard.Source = filepath.Join(
+			dir,
+			file.Name(),
+		)
+
 		dashboards = append(
 			dashboards,
-			dashboard,
+			dashboard.Dashboard,
 		)
 	}
 
